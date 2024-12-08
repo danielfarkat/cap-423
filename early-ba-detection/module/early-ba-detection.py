@@ -328,7 +328,7 @@ def aearly_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
     item_before_files = []
     item_after_files = []
 
-    
+    # for i in tqdm(range(2), desc="Processando assets", unit="asset"):
     for i in tqdm(range(len(df)-1), desc="Processando assets", unit="asset"):    
         asset_exemple = i + 1
 
@@ -402,15 +402,19 @@ def aearly_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
         item_before_files.append(item_before)
         item_after_files.append(item_after)
         ba_files.append(ba_detect)
-
-    # Cria um DataFrame final com os resultados
-    resultado_df = pd.DataFrame([{
+    day_before_files= np.array(day_before_files)
+    day_after_files = np.array(day_after_files)
+    item_before_files = np.array(item_before_files)
+    item_after_files = np.array(item_after_files)
+    ba_files = np.array(ba_files)
+        # Cria um DataFrame final com os resultados
+    resultado_df = pd.DataFrame({
         "day_before": day_before_files,
         "day_after": day_after_files,
         "item_before": item_before_files,
         "item_after": item_after_files,
         "ba_detect": ba_files
-    }])
+    })
     resultado_df.to_json(f'early_burned_area_at_tile_{tile}_year_{year}.json', orient='records', lines=False, force_ascii=False, indent=4)
     print(f"file 'early_burned_area_at_tile_{tile}_year_{year}.json' saved!")
     return resultado_df
