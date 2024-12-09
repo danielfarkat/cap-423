@@ -2,7 +2,7 @@
 
 This Study is designed to assist researchers in accessing information from multiple APIs related to burned areas using a MIMO (Multiple Input Multiple Output) system, as outlined below. It demonstrates how to retrieve the correct parameters from the necessary matrices and vectors. The goal is to input a tile and a date, and receive a JSON (JavaScript Object Notation) response containing data for both the before and after dates, along with relevant STAC (SpatioTemporal Asset Catalog) items and information on the presence or absence of burned areas in the image.
 
-![alt text](jupyter/preprocessing.drawio.png)
+![alt text](image.png)
 
 # Paths
 - the fuction is in the patk called [modules](module) 
