@@ -14,3 +14,6 @@ This Study is designed to assist researchers in accessing information from multi
 
 - The [older-version](older-versions) present all the versions and atualizations;
 
+-  in the main at the file `requirements.txt` all of the versions of the needed packages are passed;
+
+- the main file where all the fuctions are it is the [early-ba-detection](module/early-ba-detection.py);
