@@ -5,23 +5,15 @@ import requests
 from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
-
-# Bibliotecas de geometria e geoprocessamento
 import geopandas as gpd
 from shapely.geometry import Point, MultiPoint
 from pyproj import Proj, Transformer, transform
 from datetime import datetime, timedelta
-# Bibliotecas externas específicas
 import rasterio
 import pystac_client
 import folium
-# Biblioteca interna (customizada)
-#import early_ba_detection  # -> Nome da biblioteca que foi criada'
-
 from rasterio.features import shapes
 from shapely.geometry import shape
-# %matplotlib inline
-
 import numpy as np
 import rasterio
 from matplotlib import pyplot as plt
@@ -30,17 +22,6 @@ from pyproj.crs import CRS
 from rasterio.windows import bounds, from_bounds, Window
 from pyproj import CRS
 from rasterio.features import rasterize
-
-# versions = {
-#     "geopandas": gpd.__version__,
-#     "requests": requests.__version__,
-#     "pandas": pd.__version__,
-#     "numpy": np.__version__,
-#     "shapely": shapely.__version__,
-#     "lxml": lxml.__version__,
-#     "tqdm": tqdm.__version__
-# }
-
 import geopandas as gpd
 import requests
 import pandas as pd
@@ -49,61 +30,16 @@ import shapely
 import lxml
 import xml.etree.ElementTree as ET
 import tqdm
-# versions = {
-
-#     "geopandas": gpd.__version__,
-#     "requests": requests.__version__,
-#     "pandas": pd.__version__,
-#     "numpy": np.__version__,
-#     "shapely": shapely.__version__,
-#     "lxml": lxml.__version__,
-#     "tqdm": tqdm.__version__
-# }
 from tqdm import tqdm
 from shapely import Point
 
 
 def cluster_fire_spots(bbox_4326, year='2024', first_month='09', first_day='10', second_month='09', second_day='15'):
-    """
-    # Cluster Fire Spots Function
-
-    This function, `cluster_fire_spots`, retrieves and analyzes fire spot data from the TerraBrasilis database (INPE - Brazilian National Institute for Space Research).
-
-    ## Overview:
-    The function retrieves fire spot data within a specified bounding box and date range. It queries the TerraBrasilis WFS (Web Feature Service) API for data on fire occurrences (called "focos") based on latitude, longitude, and timestamp.
-
-    ## Parameters:
-    - `bbox` (tuple): 
-        - A tuple containing the bounding box coordinates in the form (lat_min, lon_min, lat_max, lon_max).
-    - `year` (str): The year to filter the fire spots (default: `'2024'`).
-    - `first_month` (str): The first month of the date range to filter fire spots (default: `'09'`).
-    - `first_day` (str): The first day of the date range to filter fire spots (default: `'10'`).
-    - `second_month` (str): The second month of the date range to filter fire spots (default: `'09'`).
-    - `second_day` (str): The second day of the date range to filter fire spots (default: `'15'`).
-
-    ## Returns:
-    - A GeoDataFrame containing the fire spot data, including coordinates (latitude and longitude) and the corresponding timestamp of each fire occurrence.
-    - The function also saves the resulting data as a GeoPackage file (`focosat_bbox.gpkg`).
-
-    ## Usage Example:
-    ```python
-    bbox = (-10.0, -60.0, -5.0, -55.0)
-    gdf = cluster_fire_spots(bbox, year='2023', first_month='01', first_day='01', second_month='01', second_day='15')
-    print(gdf.head())
-    """
-    # Extracting boundaries from the bounding box
     try:
         lon_min = bbox_4326['minx']
         lat_min = bbox_4326['miny']
         lon_max = bbox_4326['maxx']
         lat_max = bbox_4326['maxy']
-        # print("Processing bounding box for boundaries...")
-        # print(f"Latitude mínima: {lat_min}")
-        # print(f"Longitude mínima: {lon_min}")
-        # print(f"Latitude máxima: {lat_max}")
-        # print(f"Longitude máxima: {lon_max}")
-
-        # Retrieve fire spot data based on the provided bbox
         gdf = print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_day, second_month, second_day)
         return gdf
 
@@ -112,12 +48,8 @@ def cluster_fire_spots(bbox_4326, year='2024', first_month='09', first_day='10',
         return False
 
 def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_day, second_month, second_day):
-    # Generating request URL
     path = f"https://terrabrasilis.dpi.inpe.br/queimadas/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=bdqueimadas3:focos&TYPENAME=bdqueimadas3:focos&SRSNAME=urn:ogc:def:crs:EPSG::4326&CQL_FILTER=data_hora_gmt%20between%20{year}-{first_month}-{first_day}T00%3A00%3A00%20and%20{year}-{second_month}-{second_day}T23%3A59%3A59%20AND%20longitude%20%3E%20{lon_min}%20AND%20longitude%20%3C%20{lon_max}%20AND%20latitude%20%3E%20{lat_min}%20AND%20latitude%20%3C%20{lat_max}"
-    # print("Fetching data from TerraBrasilis...")
-    
     response = requests.get(path)
-    
     lat, lon, date = [], [], []
     xml_data = response.content
     root = ET.fromstring(xml_data)
@@ -126,8 +58,6 @@ def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_da
         'gml': 'http://www.opengis.net/gml/3.2',
         'bdqueimadas3': 'https://www.inpe.br/queimadas/bdqueimadas3'
     }
-
-    # print("Processing fire spot data...")
     for foco in root.findall('.//wfs:member/bdqueimadas3:focos', namespaces):
         latitude = foco.find('bdqueimadas3:latitude', namespaces).text
         longitude = foco.find('bdqueimadas3:longitude', namespaces).text
@@ -139,8 +69,6 @@ def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_da
     focos_lat = np.array(lat)
     focos_lon = np.array(lon)
     focos_date = np.array(date)
-
-    # print("Creating GeoDataFrame...")
     
     result = list(zip(map(lambda x: float(x), focos_lon), map(lambda x: float(x), focos_lat)))
     d = {'coordinates': result, 'date': focos_date}
@@ -167,7 +95,7 @@ def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
     start_date = f"{year}-01-01"
     end_date = f"{year}-12-30"
     catalog_url = 'https://data.inpe.br/bdc/stac/v1/'
-    client = pystac_client.Client.open(catalog_url) # access the service
+    client = pystac_client.Client.open(catalog_url) 
     search = client.search(
         collections=['S2_L2A-1'],  # Colection name
         datetime=f"{start_date}/{end_date}",  # Filtro por data  
@@ -176,7 +104,7 @@ def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
             'field': 'properties.datetime',
             'direction': 'asc'
         }],
-        limit=100  # we do need to limitate to pass from an amount that is possible to be proccessed in real time
+        limit=100 
     )
     itens = list(search.get_all_items())
     dates_after = []
@@ -196,7 +124,6 @@ def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
         current_item = itens[i]
         prev_item = itens[i - 1]
         if current_item.datetime.date() != prev_item.datetime.date():
-            # Comparação com o item anterior
             reference_item = prev_item
             # print(itens[i].datetime.date(),itens[i-1].datetime.date())
             if k==-1:
@@ -328,9 +255,10 @@ def aearly_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
     item_before_files = []
     item_after_files = []
 
-    # for i in tqdm(range(2), desc="Processando assets", unit="asset"):
+    # for i in tqdm(range(1), desc="Processando assets", unit="asset"):
     for i in tqdm(range(len(df)-1), desc="Processando assets", unit="asset"):    
-        asset_exemple = i + 1
+        # asset_exemple = 76
+        asset_exemple = i+1
 
         scl_before = df.iloc[asset_exemple, 10]
         scl_after = df.iloc[asset_exemple, 11]
