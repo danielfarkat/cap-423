@@ -246,7 +246,7 @@ def dnbr_and_dnbr_swir(dscl,ref_b8a_before,href_b11_before,href_b12_before,ref_b
     return dnbr_mask, dnbr_swir_mask,bbox_4326
 
 
-def aearly_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
+def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
     df = generate_data_frame(year, tile, cloud_porcentage)
 
     ba_files = []
@@ -341,7 +341,8 @@ def aearly_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
         "day_after": day_after_files,
         "item_before": item_before_files,
         "item_after": item_after_files,
-        "ba_detect": ba_files
+        "ba_detect": ba_files,
+        "pixels_of_ba":pixels_sum
     })
     resultado_df.to_json(f'early_burned_area_at_tile_{tile}_year_{year}.json', orient='records', lines=False, force_ascii=False, indent=4)
     print(f"file 'early_burned_area_at_tile_{tile}_year_{year}.json' saved!")
@@ -349,5 +350,5 @@ def aearly_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
 
 
 if __name__=='__main__':
-    aearly_ba_detection()
+    early_ba_detection()
     
