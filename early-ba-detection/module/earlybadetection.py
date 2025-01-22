@@ -20,7 +20,6 @@ import lxml
 from tqdm import tqdm
 import os
 
-
 def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
     '''
     input:
@@ -137,8 +136,6 @@ def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
 
     return df
 
-
-
 def cluster_fire_spots(bbox_4326, year='2024', first_month='09', first_day='10', second_month='09', second_day='15'):
     try:
         lon_min = bbox_4326['minx']
@@ -198,7 +195,6 @@ def calculate_dscl(scl_path_before,scl_path_after):
 
     return dscl, transform, crs,bbox_4326
 
-
 def read_tiff_image(file_path):
     with rasterio.open(file_path) as src:
         image_data = src.read(1) 
@@ -253,7 +249,6 @@ def dnbr_and_dnbr_swir(dscl,ref_b8a_before,href_b11_before,href_b12_before,ref_b
     dnbr_mask[dnbr <= 0.2] = np.nan  # Sem mudança
 
     return dnbr_mask, dnbr_swir_mask,bbox_4326
-
 
 def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir=''):
     '''
@@ -403,7 +398,6 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
     # print(f"file 'early_burned_area_{year}_{tile}_{cloud_porcentage}.json' saved!")
     return resultado_df, output_file
 
-
 if __name__=='__main__':
 
     # Ask for the year
@@ -463,10 +457,3 @@ if __name__=='__main__':
     print('CONGRATULATIONS YOUR FILE IS SAVED AT:')
     print(f'{output_file_location}')
     # print(f'"early_burned_area_{year}_{tile}_{cloud_percentage}.json"')
-
-
-
-
-
-    
-    
