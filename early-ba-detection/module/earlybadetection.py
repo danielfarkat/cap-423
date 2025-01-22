@@ -7,91 +7,39 @@ import numpy as np
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point, MultiPoint
-from pyproj import Proj, Transformer, transform
+from pyproj import Proj, Transformer, CRS
 from datetime import datetime, timedelta
 import rasterio
 import pystac_client
 import folium
-from rasterio.features import shapes
-from shapely.geometry import shape
-import numpy as np
-import rasterio
+from rasterio.features import shapes, rasterize
 from matplotlib import pyplot as plt
-from pyproj import Transformer
-from pyproj.crs import CRS
 from rasterio.windows import bounds, from_bounds, Window
-from pyproj import CRS
-from rasterio.features import rasterize
-import geopandas as gpd
-import requests
-import pandas as pd
-import numpy as np
 import shapely
 import lxml
-import xml.etree.ElementTree as ET
-import tqdm
 from tqdm import tqdm
-from shapely import Point
+import os
 
-
-def cluster_fire_spots(bbox_4326, year='2024', first_month='09', first_day='10', second_month='09', second_day='15'):
-    try:
-        lon_min = bbox_4326['minx']
-        lat_min = bbox_4326['miny']
-        lon_max = bbox_4326['maxx']
-        lat_max = bbox_4326['maxy']
-        gdf = print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_day, second_month, second_day)
-        return gdf
-
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
-
-def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_day, second_month, second_day):
-    path = f"https://terrabrasilis.dpi.inpe.br/queimadas/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=bdqueimadas3:focos&TYPENAME=bdqueimadas3:focos&SRSNAME=urn:ogc:def:crs:EPSG::4326&CQL_FILTER=data_hora_gmt%20between%20{year}-{first_month}-{first_day}T00%3A00%3A00%20and%20{year}-{second_month}-{second_day}T23%3A59%3A59%20AND%20longitude%20%3E%20{lon_min}%20AND%20longitude%20%3C%20{lon_max}%20AND%20latitude%20%3E%20{lat_min}%20AND%20latitude%20%3C%20{lat_max}"
-    response = requests.get(path)
-    lat, lon, date = [], [], []
-    xml_data = response.content
-    root = ET.fromstring(xml_data)
-    namespaces = {
-        'wfs': 'http://www.opengis.net/wfs/2.0',
-        'gml': 'http://www.opengis.net/gml/3.2',
-        'bdqueimadas3': 'https://www.inpe.br/queimadas/bdqueimadas3'
-    }
-    for foco in root.findall('.//wfs:member/bdqueimadas3:focos', namespaces):
-        latitude = foco.find('bdqueimadas3:latitude', namespaces).text
-        longitude = foco.find('bdqueimadas3:longitude', namespaces).text
-        data_hora = foco.find('bdqueimadas3:data_hora_gmt', namespaces).text
-        lat.append(latitude)
-        lon.append(longitude)
-        date.append(data_hora)
-
-    focos_lat = np.array(lat)
-    focos_lon = np.array(lon)
-    focos_date = np.array(date)
-    
-    result = list(zip(map(lambda x: float(x), focos_lon), map(lambda x: float(x), focos_lat)))
-    d = {'coordinates': result, 'date': focos_date}
-    df = pd.DataFrame(data=d)
-    df['geometry'] = df['coordinates'].apply(lambda x: Point(x[0], x[1]))
-    gdf = gpd.GeoDataFrame(df, geometry='geometry')
-    gdf.crs = {"init": "epsg:4326"}
-    return gdf
-
-def calculate_dscl(scl_path_before,scl_path_after):
-    scl_data_before, transform, crs, scl_bounds_before,bbox_4326 = read_tiff_image(scl_path_before)
-    scl_data_after, _, _, scl_bounds_after,bbox_4326 = read_tiff_image(scl_path_after)
-
-    scl_mask_before = np.isin(scl_data_before, [4, 5])  
-    scl_mask_after = np.isin(scl_data_after, [4, 5])
-
-    scl_before = np.where (scl_mask_before, 1, np.nan)
-    scl_after = np.where (scl_mask_after, 1, np.nan)
-    dscl = scl_before*scl_after
-
-    return dscl, transform, crs,bbox_4326
 
 def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
+    '''
+    input:
+    
+    - Tile; 
+
+    - Year( of analysis);
+     
+    - Cloud procentage; 
+
+    Data frame output:
+     
+    - Each band (red,swir1,swir2,scl) (before and after);
+
+    - Name of the itens(before and after);
+
+    - Dates (before and after);
+    
+    '''
     start_date = f"{year}-01-01"
     end_date = f"{year}-12-30"
     catalog_url = 'https://data.inpe.br/bdc/stac/v1/'
@@ -190,6 +138,67 @@ def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
     return df
 
 
+
+def cluster_fire_spots(bbox_4326, year='2024', first_month='09', first_day='10', second_month='09', second_day='15'):
+    try:
+        lon_min = bbox_4326['minx']
+        lat_min = bbox_4326['miny']
+        lon_max = bbox_4326['maxx']
+        lat_max = bbox_4326['maxy']
+        gdf, gdf_size = print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_day, second_month, second_day)
+        return gdf, gdf_size
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
+
+def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_day, second_month, second_day):
+    path = f"https://terrabrasilis.dpi.inpe.br/queimadas/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=bdqueimadas3:focos&TYPENAME=bdqueimadas3:focos&SRSNAME=urn:ogc:def:crs:EPSG::4326&CQL_FILTER=data_hora_gmt%20between%20{year}-{first_month}-{first_day}T00%3A00%3A00%20and%20{year}-{second_month}-{second_day}T23%3A59%3A59%20AND%20longitude%20%3E%20{lon_min}%20AND%20longitude%20%3C%20{lon_max}%20AND%20latitude%20%3E%20{lat_min}%20AND%20latitude%20%3C%20{lat_max}"
+    response = requests.get(path)
+    lat, lon, date = [], [], []
+    xml_data = response.content
+    root = ET.fromstring(xml_data)
+    namespaces = {
+        'wfs': 'http://www.opengis.net/wfs/2.0',
+        'gml': 'http://www.opengis.net/gml/3.2',
+        'bdqueimadas3': 'https://www.inpe.br/queimadas/bdqueimadas3'
+    }
+    for foco in root.findall('.//wfs:member/bdqueimadas3:focos', namespaces):
+        latitude = foco.find('bdqueimadas3:latitude', namespaces).text
+        longitude = foco.find('bdqueimadas3:longitude', namespaces).text
+        data_hora = foco.find('bdqueimadas3:data_hora_gmt', namespaces).text
+        lat.append(latitude)
+        lon.append(longitude)
+        date.append(data_hora)
+
+    focos_lat = np.array(lat)
+    focos_lon = np.array(lon)
+    focos_date = np.array(date)
+    
+    result = list(zip(map(lambda x: float(x), focos_lon), map(lambda x: float(x), focos_lat)))
+    d = {'coordinates': result, 'date': focos_date}
+    df = pd.DataFrame(data=d)
+    df['geometry'] = df['coordinates'].apply(lambda x: Point(x[0], x[1]))
+    gdf = gpd.GeoDataFrame(df, geometry='geometry')
+    gdf.crs = {"init": "epsg:4326"}
+    gdf_size= len(gdf)
+    
+    return gdf, gdf_size
+
+def calculate_dscl(scl_path_before,scl_path_after):
+    scl_data_before, transform, crs, scl_bounds_before,bbox_4326 = read_tiff_image(scl_path_before)
+    scl_data_after, _, _, scl_bounds_after,bbox_4326 = read_tiff_image(scl_path_after)
+
+    scl_mask_before = np.isin(scl_data_before, [4, 5])  
+    scl_mask_after = np.isin(scl_data_after, [4, 5])
+
+    scl_before = np.where (scl_mask_before, 1, np.nan)
+    scl_after = np.where (scl_mask_after, 1, np.nan)
+    dscl = scl_before*scl_after
+
+    return dscl, transform, crs,bbox_4326
+
+
 def read_tiff_image(file_path):
     with rasterio.open(file_path) as src:
         image_data = src.read(1) 
@@ -246,7 +255,43 @@ def dnbr_and_dnbr_swir(dscl,ref_b8a_before,href_b11_before,href_b12_before,ref_b
     return dnbr_mask, dnbr_swir_mask,bbox_4326
 
 
-def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
+def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir=''):
+    '''
+    Main function:
+
+    Input: 
+
+    - Date; 
+
+    - Tile; 
+
+    - Cloud Porcantage;
+
+    JSON Name:
+
+    aerly_burned_areta_at_tile_"TILE NAME"_year_"ANALYSYS YEAR".json
+
+    - exemple: "early_burned_area_at_tile_22LHH_year_2022.json"
+
+    JSON Information Output:
+
+        "day_before":"DATE",
+        "day_after":"DATE",
+        "item_before":"FILE NAME",
+        "item_after":"FILE NAME",
+        "ba_detect":"BINARY"
+
+    '''
+
+ # no futuro quero podr fazer isso tanto para o nbr swir quanto nbr
+
+# NO FUTURO TEM QUE INTEGRAR TAMBÉM OS DADOS DE TILE BEFORE E TILE AFTER E ALÉM DISSO
+
+    #  - Mean DNBR;
+
+    # - Smalest DNBR; 
+
+    # - Gratest DNBR;
     df = generate_data_frame(year, tile, cloud_porcentage)
 
     ba_files = []
@@ -290,7 +335,8 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
         caminho_arquivo = bbox_4326
 
         # Gera buffers e máscaras rasterizadas para focos de incêndio
-        focos = cluster_fire_spots(bbox_4326, year, first_month, first_day, second_month, second_day)
+        focos, focos_size = cluster_fire_spots(bbox_4326, year, first_month, first_day, second_month, second_day)
+        focos_size=int(focos_size)
         focos = focos.to_crs(epsg=f'{crs_original.to_epsg()}')
         focos_buffer = focos.buffer(300)
 
@@ -342,13 +388,85 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50):
         "item_before": item_before_files,
         "item_after": item_after_files,
         "ba_detect": ba_files,
-        "pixels_of_ba":pixels_sum
+        "pixels_of_ba":pixels_sum,
+        "amount_of_focos":focos_size
     })
-    resultado_df.to_json(f'early_burned_area_at_tile_{tile}_year_{year}.json', orient='records', lines=False, force_ascii=False, indent=4)
-    print(f"file 'early_burned_area_at_tile_{tile}_year_{year}.json' saved!")
-    return resultado_df
+
+    # Cria o diretório se não existir
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Salva o arquivo JSON no diretório criado
+    output_file = os.path.join(output_dir, f'early_burned_area_{year}_{tile}_{cloud_percentage}.json')
+    resultado_df.to_json(output_file, orient='records', lines=False, force_ascii=False, indent=4)
+
+    # print(f"Arquivo salvo em: {output_file}")
+    # print(f"file 'early_burned_area_{year}_{tile}_{cloud_porcentage}.json' saved!")
+    return resultado_df, output_file
 
 
 if __name__=='__main__':
-    early_ba_detection()
+
+    # Ask for the year
+    while True:
+        try:
+            year = int(input("Enter the desired year (format: YYYY): "))
+            if 1000 <= year <= 9999:
+                break
+            else:
+                print("Invalid year! Please enter a year in the format YYYY.")
+        except ValueError:
+            print("Invalid input! Please enter an integer for the year.")
+
+    # Ask for the tile
+    while True:
+        tile = input("Enter the desired tile (e.g., 22L or 23K): ").strip()
+        if tile:  # Check if the tile is not empty
+            break
+        else:
+            print("Invalid tile! Please try again.")
+
+    # Ask for the cloud percentage
+    while True:
+        try:
+            cloud_percentage = float(input("Enter the maximum cloud percentage allowed (0 to 100): "))
+            if 0 <= cloud_percentage <= 100:
+                break
+            else:
+                print("Invalid percentage! Please enter a value between 0 and 100.")
+        except ValueError:
+            print("Invalid input! Please enter a decimal number for the percentage.")
+
+    # Ask for the folder to save the output
+    while True:
+        output_dir = input("Enter the folder where the output file should be saved (leave empty for the current directory): ").strip()
+        if output_dir:
+            if not os.path.exists(output_dir):
+                try:
+                    os.makedirs(output_dir, exist_ok=True)
+                    print(f"Directory '{output_dir}' created successfully.")
+                    break
+                except Exception as e:
+                    print(f"Error creating directory: {e}")
+            else:
+                print(f"Using existing directory: {output_dir}")
+                break
+        else:
+            output_dir = ""  # Current directory
+            print("Using the current directory for saving the output.")
+            break
+
+    # call the main function
+    df, output_file_location = early_ba_detection(year, tile, cloud_percentage,output_dir)
+
+    print(f"The file will be saved to: {output_file_location}")
+
+    print('CONGRATULATIONS YOUR FILE IS SAVED AT:')
+    print(f'{output_file_location}')
+    # print(f'"early_burned_area_{year}_{tile}_{cloud_percentage}.json"')
+
+
+
+
+
+    
     
