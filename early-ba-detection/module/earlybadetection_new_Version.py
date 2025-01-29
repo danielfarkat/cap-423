@@ -179,6 +179,7 @@ def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_da
     gdf = gpd.GeoDataFrame(df, geometry='geometry')
     gdf.crs = {"init": "epsg:4326"}
     gdf_size= len(gdf)
+    print(gdf_size)
     
     return gdf, gdf_size
 
@@ -262,8 +263,6 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
 
     - Cloud Porcantage;
 
-    - Output dir;
-
     JSON Name:
 
     aerly_burned_areta_at_tile_"TILE NAME"_year_"ANALYSYS YEAR".json
@@ -296,9 +295,8 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
     day_after_files = []
     item_before_files = []
     item_after_files = []
-    focos_in_the_area=[]
-    pixels_sum_value=[]
-
+    focos_in_the_area = []
+    pixels_sum_value = []
     # for i in tqdm(range(1), desc="Processando assets", unit="asset"):
     for i in tqdm(range(len(df)-1), desc="Processando assets", unit="asset"):    
         # asset_exemple = 76
@@ -332,6 +330,14 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
         second_month = f"{dates_after.month:02d}" 
         second_day = f"{dates_after.day:02d}" 
         caminho_arquivo = bbox_4326
+
+        print(bbox_4326)
+        print(year)
+        print(first_month)
+        print(first_day)
+        print(second_month)
+        print(second_day)
+
 
         # Gera buffers e máscaras rasterizadas para focos de incêndio
         focos, focos_size = cluster_fire_spots(bbox_4326, year, first_month, first_day, second_month, second_day)
@@ -401,7 +407,7 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
     os.makedirs(output_dir, exist_ok=True)
 
     # Salva o arquivo JSON no diretório criado
-    output_file = os.path.join(output_dir, f'early_burned_area_{year}_{tile}_{cloud_percentage}.json')
+    output_file = os.path.join(output_dir, f'early_burned_area_{year}_{tile}_{cloud_porcentage}.json')
     resultado_df.to_json(output_file, orient='records', lines=False, force_ascii=False, indent=4)
 
     # print(f"Arquivo salvo em: {output_file}")
