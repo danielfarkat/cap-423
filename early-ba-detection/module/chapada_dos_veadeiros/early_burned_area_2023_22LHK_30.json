@@ -6,7 +6,8 @@
         "item_after":"S2B_MSIL2A_20230211T133149_N0509_R081_T22LHK_20230211T160146",
         "ba_detect":0,
         "pixels_of_ba":1,
-        "amount_of_focos":15
+        "amount_of_firespots":15,
+        "firespots_that":1
     },
     {
         "day_before":"2023-02-11",
@@ -15,7 +16,8 @@
         "item_after":"S2A_MSIL2A_20230226T133141_N0509_R081_T22LHK_20230226T185210",
         "ba_detect":1,
         "pixels_of_ba":519,
-        "amount_of_focos":60
+        "amount_of_firespots":60,
+        "firespots_that":12
     },
     {
         "day_before":"2023-02-26",
@@ -24,7 +26,8 @@
         "item_after":"S2B_MSIL2A_20230228T132239_N0509_R038_T22LHK_20230228T171137",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":2
+        "amount_of_firespots":2,
+        "firespots_that":0
     },
     {
         "day_before":"2023-02-28",
@@ -33,7 +36,8 @@
         "item_after":"S2B_MSIL2A_20230310T132239_N0509_R038_T22LHK_20230310T172442",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":7
+        "amount_of_firespots":7,
+        "firespots_that":0
     },
     {
         "day_before":"2023-03-10",
@@ -42,7 +46,8 @@
         "item_after":"S2A_MSIL2A_20230325T132231_N0509_R038_T22LHK_20230325T201056",
         "ba_detect":0,
         "pixels_of_ba":3,
-        "amount_of_focos":17
+        "amount_of_firespots":17,
+        "firespots_that":2
     },
     {
         "day_before":"2023-03-25",
@@ -51,7 +56,8 @@
         "item_after":"S2B_MSIL2A_20230330T132239_N0509_R038_T22LHK_20230330T153747",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":15
+        "amount_of_firespots":15,
+        "firespots_that":0
     },
     {
         "day_before":"2023-03-30",
@@ -60,7 +66,8 @@
         "item_after":"S2B_MSIL2A_20230409T132239_N0509_R038_T22LHK_20230409T154132",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":9
+        "amount_of_firespots":9,
+        "firespots_that":0
     },
     {
         "day_before":"2023-04-09",
@@ -69,7 +76,8 @@
         "item_after":"S2A_MSIL2A_20230417T133141_N0509_R081_T22LHK_20230417T204649",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":13
+        "amount_of_firespots":13,
+        "firespots_that":0
     },
     {
         "day_before":"2023-04-17",
@@ -78,7 +86,8 @@
         "item_after":"S2A_MSIL2A_20230427T133151_N0509_R081_T22LHK_20230427T183900",
         "ba_detect":0,
         "pixels_of_ba":2,
-        "amount_of_focos":101
+        "amount_of_firespots":101,
+        "firespots_that":2
     },
     {
         "day_before":"2023-04-27",
@@ -87,7 +96,8 @@
         "item_after":"S2B_MSIL2A_20230429T132239_N0509_R038_T22LHK_20230429T153418",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":47
+        "amount_of_firespots":47,
+        "firespots_that":0
     },
     {
         "day_before":"2023-04-29",
@@ -96,7 +106,8 @@
         "item_after":"S2B_MSIL2A_20230502T133149_N0509_R081_T22LHK_20230502T160255",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":9
+        "amount_of_firespots":9,
+        "firespots_that":0
     },
     {
         "day_before":"2023-05-02",
@@ -105,7 +116,8 @@
         "item_after":"S2A_MSIL2A_20230504T132231_N0509_R038_T22LHK_20230504T183101",
         "ba_detect":0,
         "pixels_of_ba":5,
-        "amount_of_focos":33
+        "amount_of_firespots":33,
+        "firespots_that":1
     },
     {
         "day_before":"2023-05-04",
@@ -114,7 +126,8 @@
         "item_after":"S2A_MSIL2A_20230507T133151_N0509_R081_T22LHK_20230507T185355",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":42
+        "amount_of_firespots":42,
+        "firespots_that":0
     },
     {
         "day_before":"2023-05-07",
@@ -123,7 +136,8 @@
         "item_after":"S2B_MSIL2A_20230509T132239_N0509_R038_T22LHK_20230509T154207",
         "ba_detect":0,
         "pixels_of_ba":3,
-        "amount_of_focos":7
+        "amount_of_firespots":7,
+        "firespots_that":1
     },
     {
         "day_before":"2023-05-09",
@@ -132,7 +146,8 @@
         "item_after":"S2B_MSIL2A_20230512T133149_N0509_R081_T22LHK_20230512T155254",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":53
+        "amount_of_firespots":53,
+        "firespots_that":0
     },
     {
         "day_before":"2023-05-12",
@@ -141,7 +156,8 @@
         "item_after":"S2A_MSIL2A_20230514T132231_N0509_R038_T22LHK_20230514T201156",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":38
+        "amount_of_firespots":38,
+        "firespots_that":0
     },
     {
         "day_before":"2023-05-14",
@@ -150,7 +166,8 @@
         "item_after":"S2A_MSIL2A_20230517T133151_N0509_R081_T22LHK_20230517T204753",
         "ba_detect":1,
         "pixels_of_ba":66,
-        "amount_of_focos":45
+        "amount_of_firespots":45,
+        "firespots_that":7
     },
     {
         "day_before":"2023-05-17",
@@ -159,7 +176,8 @@
         "item_after":"S2B_MSIL2A_20230519T132239_N0509_R038_T22LHK_20230519T153934",
         "ba_detect":0,
         "pixels_of_ba":16,
-        "amount_of_focos":58
+        "amount_of_firespots":58,
+        "firespots_that":5
     },
     {
         "day_before":"2023-05-19",
@@ -168,7 +186,8 @@
         "item_after":"S2B_MSIL2A_20230522T133149_N0509_R081_T22LHK_20230522T160052",
         "ba_detect":0,
         "pixels_of_ba":9,
-        "amount_of_focos":17
+        "amount_of_firespots":17,
+        "firespots_that":1
     },
     {
         "day_before":"2023-05-22",
@@ -177,7 +196,8 @@
         "item_after":"S2A_MSIL2A_20230524T132241_N0509_R038_T22LHK_20230524T193759",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":10
+        "amount_of_firespots":10,
+        "firespots_that":0
     },
     {
         "day_before":"2023-05-24",
@@ -186,7 +206,8 @@
         "item_after":"S2A_MSIL2A_20230527T133151_N0509_R081_T22LHK_20230527T204559",
         "ba_detect":0,
         "pixels_of_ba":12,
-        "amount_of_focos":24
+        "amount_of_firespots":24,
+        "firespots_that":4
     },
     {
         "day_before":"2023-05-27",
@@ -195,7 +216,8 @@
         "item_after":"S2B_MSIL2A_20230529T132239_N0509_R038_T22LHK_20230529T154228",
         "ba_detect":1,
         "pixels_of_ba":140,
-        "amount_of_focos":21
+        "amount_of_firespots":21,
+        "firespots_that":6
     },
     {
         "day_before":"2023-05-29",
@@ -204,7 +226,8 @@
         "item_after":"S2A_MSIL2A_20230603T132241_N0509_R038_T22LHK_20230603T201151",
         "ba_detect":0,
         "pixels_of_ba":37,
-        "amount_of_focos":40
+        "amount_of_firespots":40,
+        "firespots_that":5
     },
     {
         "day_before":"2023-06-03",
@@ -213,7 +236,8 @@
         "item_after":"S2A_MSIL2A_20230606T133151_N0509_R081_T22LHK_20230606T204450",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":69
+        "amount_of_firespots":69,
+        "firespots_that":0
     },
     {
         "day_before":"2023-06-06",
@@ -222,7 +246,8 @@
         "item_after":"S2B_MSIL2A_20230608T132239_N0509_R038_T22LHK_20230608T154659",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":44
+        "amount_of_firespots":44,
+        "firespots_that":0
     },
     {
         "day_before":"2023-06-08",
@@ -231,7 +256,8 @@
         "item_after":"S2B_MSIL2A_20230611T133149_N0509_R081_T22LHK_20230611T160216",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":8
+        "amount_of_firespots":8,
+        "firespots_that":0
     },
     {
         "day_before":"2023-06-11",
@@ -240,7 +266,8 @@
         "item_after":"S2A_MSIL2A_20230613T132241_N0509_R038_T22LHK_20230613T202352",
         "ba_detect":0,
         "pixels_of_ba":1,
-        "amount_of_focos":8
+        "amount_of_firespots":8,
+        "firespots_that":1
     },
     {
         "day_before":"2023-06-13",
@@ -249,7 +276,8 @@
         "item_after":"S2B_MSIL2A_20230618T132239_N0509_R038_T22LHK_20230618T154345",
         "ba_detect":0,
         "pixels_of_ba":7,
-        "amount_of_focos":79
+        "amount_of_firespots":79,
+        "firespots_that":1
     },
     {
         "day_before":"2023-06-18",
@@ -258,7 +286,8 @@
         "item_after":"S2B_MSIL2A_20230621T133149_N0509_R081_T22LHK_20230621T160104",
         "ba_detect":0,
         "pixels_of_ba":7,
-        "amount_of_focos":77
+        "amount_of_firespots":77,
+        "firespots_that":3
     },
     {
         "day_before":"2023-06-21",
@@ -267,7 +296,8 @@
         "item_after":"S2A_MSIL2A_20230623T132241_N0509_R038_T22LHK_20230623T201602",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":42
+        "amount_of_firespots":42,
+        "firespots_that":0
     },
     {
         "day_before":"2023-06-23",
@@ -276,7 +306,8 @@
         "item_after":"S2B_MSIL2A_20230628T132239_N0509_R038_T22LHK_20230628T154220",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":25
+        "amount_of_firespots":25,
+        "firespots_that":0
     },
     {
         "day_before":"2023-06-28",
@@ -285,7 +316,8 @@
         "item_after":"S2B_MSIL2A_20230701T133149_N0509_R081_T22LHK_20230701T160210",
         "ba_detect":0,
         "pixels_of_ba":4,
-        "amount_of_focos":52
+        "amount_of_firespots":52,
+        "firespots_that":2
     },
     {
         "day_before":"2023-07-01",
@@ -294,7 +326,8 @@
         "item_after":"S2A_MSIL2A_20230703T132241_N0509_R038_T22LHK_20230703T202154",
         "ba_detect":1,
         "pixels_of_ba":78,
-        "amount_of_focos":100
+        "amount_of_firespots":100,
+        "firespots_that":5
     },
     {
         "day_before":"2023-07-03",
@@ -303,7 +336,8 @@
         "item_after":"S2A_MSIL2A_20230706T133151_N0509_R081_T22LHK_20230706T205954",
         "ba_detect":0,
         "pixels_of_ba":28,
-        "amount_of_focos":138
+        "amount_of_firespots":138,
+        "firespots_that":5
     },
     {
         "day_before":"2023-07-06",
@@ -312,7 +346,8 @@
         "item_after":"S2B_MSIL2A_20230708T132239_N0509_R038_T22LHK_20230708T154734",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":21
+        "amount_of_firespots":21,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-08",
@@ -321,7 +356,8 @@
         "item_after":"S2B_MSIL2A_20230711T133149_N0509_R081_T22LHK_20230711T174141",
         "ba_detect":0,
         "pixels_of_ba":7,
-        "amount_of_focos":35
+        "amount_of_firespots":35,
+        "firespots_that":4
     },
     {
         "day_before":"2023-07-11",
@@ -330,7 +366,8 @@
         "item_after":"S2A_MSIL2A_20230713T132241_N0509_R038_T22LHK_20230713T193202",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":48
+        "amount_of_firespots":48,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-11",
@@ -339,7 +376,8 @@
         "item_after":"S2A_MSIL2A_20230713T132241_N0509_R038_T22LHK_20230713T194850",
         "ba_detect":0,
         "pixels_of_ba":32,
-        "amount_of_focos":48
+        "amount_of_firespots":48,
+        "firespots_that":15
     },
     {
         "day_before":"2023-07-13",
@@ -348,7 +386,8 @@
         "item_after":"S2A_MSIL2A_20230716T133151_N0509_R081_T22LHK_20230716T210254",
         "ba_detect":0,
         "pixels_of_ba":13,
-        "amount_of_focos":32
+        "amount_of_firespots":32,
+        "firespots_that":3
     },
     {
         "day_before":"2023-07-16",
@@ -357,7 +396,8 @@
         "item_after":"S2B_MSIL2A_20230718T132239_N0509_R038_T22LHK_20230718T154406",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":16
+        "amount_of_firespots":16,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-18",
@@ -366,7 +406,8 @@
         "item_after":"S2B_MSIL2A_20230721T133149_N0509_R081_T22LHK_20230721T155953",
         "ba_detect":0,
         "pixels_of_ba":22,
-        "amount_of_focos":121
+        "amount_of_firespots":121,
+        "firespots_that":4
     },
     {
         "day_before":"2023-07-21",
@@ -375,7 +416,8 @@
         "item_after":"S2A_MSIL2A_20230723T132241_N0509_R038_T22LHK_20230723T202155",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":11
+        "amount_of_firespots":11,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-23",
@@ -384,7 +426,8 @@
         "item_after":"S2A_MSIL2A_20230726T133151_N0509_R081_T22LHK_20230726T204000",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":74
+        "amount_of_firespots":74,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-26",
@@ -393,7 +436,8 @@
         "item_after":"S2B_MSIL2A_20230728T132239_N0509_R038_T22LHK_20230728T154244",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":69
+        "amount_of_firespots":69,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-28",
@@ -402,7 +446,8 @@
         "item_after":"S2B_MSIL2A_20230731T133149_N0509_R081_T22LHK_20230731T160106",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":31
+        "amount_of_firespots":31,
+        "firespots_that":0
     },
     {
         "day_before":"2023-07-31",
@@ -411,7 +456,8 @@
         "item_after":"S2A_MSIL2A_20230802T132241_N0509_R038_T22LHK_20230802T201905",
         "ba_detect":1,
         "pixels_of_ba":476,
-        "amount_of_focos":67
+        "amount_of_firespots":67,
+        "firespots_that":27
     },
     {
         "day_before":"2023-08-02",
@@ -420,7 +466,8 @@
         "item_after":"S2B_MSIL2A_20230807T132239_N0509_R038_T22LHK_20230807T154214",
         "ba_detect":0,
         "pixels_of_ba":1,
-        "amount_of_focos":115
+        "amount_of_firespots":115,
+        "firespots_that":1
     },
     {
         "day_before":"2023-08-07",
@@ -429,7 +476,8 @@
         "item_after":"S2B_MSIL2A_20230810T133149_N0509_R081_T22LHK_20230810T174423",
         "ba_detect":1,
         "pixels_of_ba":228,
-        "amount_of_focos":123
+        "amount_of_firespots":123,
+        "firespots_that":18
     },
     {
         "day_before":"2023-08-10",
@@ -438,7 +486,8 @@
         "item_after":"S2A_MSIL2A_20230812T132241_N0509_R038_T22LHK_20230812T201058",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":37
+        "amount_of_firespots":37,
+        "firespots_that":0
     },
     {
         "day_before":"2023-08-12",
@@ -447,7 +496,8 @@
         "item_after":"S2B_MSIL2A_20230817T132239_N0509_R038_T22LHK_20230817T154959",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":80
+        "amount_of_firespots":80,
+        "firespots_that":0
     },
     {
         "day_before":"2023-08-17",
@@ -456,7 +506,8 @@
         "item_after":"S2B_MSIL2A_20230820T133149_N0509_R081_T22LHK_20230820T160409",
         "ba_detect":1,
         "pixels_of_ba":93,
-        "amount_of_focos":149
+        "amount_of_firespots":149,
+        "firespots_that":9
     },
     {
         "day_before":"2023-08-20",
@@ -465,7 +516,8 @@
         "item_after":"S2A_MSIL2A_20230822T132241_N0509_R038_T22LHK_20230822T183200",
         "ba_detect":1,
         "pixels_of_ba":67,
-        "amount_of_focos":224
+        "amount_of_firespots":224,
+        "firespots_that":8
     },
     {
         "day_before":"2023-08-22",
@@ -474,7 +526,8 @@
         "item_after":"S2A_MSIL2A_20230901T132241_N0509_R038_T22LHK_20230901T202156",
         "ba_detect":1,
         "pixels_of_ba":647,
-        "amount_of_focos":123
+        "amount_of_firespots":123,
+        "firespots_that":36
     },
     {
         "day_before":"2023-09-01",
@@ -483,7 +536,8 @@
         "item_after":"S2A_MSIL2A_20230904T133151_N0509_R081_T22LHK_20230904T181902",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":140
+        "amount_of_firespots":140,
+        "firespots_that":0
     },
     {
         "day_before":"2023-09-04",
@@ -492,7 +546,8 @@
         "item_after":"S2B_MSIL2A_20230906T132239_N0509_R038_T22LHK_20230906T154742",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":99
+        "amount_of_firespots":99,
+        "firespots_that":0
     },
     {
         "day_before":"2023-09-06",
@@ -501,7 +556,8 @@
         "item_after":"S2B_MSIL2A_20230909T133149_N0509_R081_T22LHK_20230909T160422",
         "ba_detect":0,
         "pixels_of_ba":1,
-        "amount_of_focos":283
+        "amount_of_firespots":283,
+        "firespots_that":1
     },
     {
         "day_before":"2023-09-09",
@@ -510,7 +566,8 @@
         "item_after":"S2A_MSIL2A_20230911T132241_N0509_R038_T22LHK_20230911T183601",
         "ba_detect":0,
         "pixels_of_ba":2,
-        "amount_of_focos":352
+        "amount_of_firespots":352,
+        "firespots_that":3
     },
     {
         "day_before":"2023-09-11",
@@ -519,7 +576,8 @@
         "item_after":"S2A_MSIL2A_20230914T133151_N0509_R081_T22LHK_20230914T185657",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":366
+        "amount_of_firespots":366,
+        "firespots_that":0
     },
     {
         "day_before":"2023-09-14",
@@ -528,7 +586,8 @@
         "item_after":"S2B_MSIL2A_20230916T132239_N0509_R038_T22LHK_20230916T171521",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":74
+        "amount_of_firespots":74,
+        "firespots_that":0
     },
     {
         "day_before":"2023-09-16",
@@ -537,7 +596,8 @@
         "item_after":"S2B_MSIL2A_20230919T133149_N0509_R081_T22LHK_20230919T155656",
         "ba_detect":1,
         "pixels_of_ba":87,
-        "amount_of_focos":105
+        "amount_of_firespots":105,
+        "firespots_that":1
     },
     {
         "day_before":"2023-09-19",
@@ -546,7 +606,8 @@
         "item_after":"S2A_MSIL2A_20230921T132231_N0509_R038_T22LHK_20230921T195705",
         "ba_detect":0,
         "pixels_of_ba":48,
-        "amount_of_focos":263
+        "amount_of_firespots":263,
+        "firespots_that":2
     },
     {
         "day_before":"2023-09-21",
@@ -555,7 +616,8 @@
         "item_after":"S2A_MSIL2A_20230924T133151_N0509_R081_T22LHK_20230926T112757",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":497
+        "amount_of_firespots":497,
+        "firespots_that":0
     },
     {
         "day_before":"2023-09-24",
@@ -564,7 +626,8 @@
         "item_after":"S2B_MSIL2A_20230926T132239_N0509_R038_T22LHK_20230926T171115",
         "ba_detect":1,
         "pixels_of_ba":395,
-        "amount_of_focos":433
+        "amount_of_firespots":433,
+        "firespots_that":28
     },
     {
         "day_before":"2023-09-26",
@@ -573,7 +636,8 @@
         "item_after":"S2A_MSIL2A_20231001T132231_N0509_R038_T22LHK_20231002T133101",
         "ba_detect":1,
         "pixels_of_ba":357,
-        "amount_of_focos":244
+        "amount_of_firespots":244,
+        "firespots_that":26
     },
     {
         "day_before":"2023-10-01",
@@ -582,7 +646,8 @@
         "item_after":"S2B_MSIL2A_20231009T133149_N0509_R081_T22LHK_20231009T155242",
         "ba_detect":0,
         "pixels_of_ba":45,
-        "amount_of_focos":167
+        "amount_of_firespots":167,
+        "firespots_that":1
     },
     {
         "day_before":"2023-10-09",
@@ -591,7 +656,8 @@
         "item_after":"S2A_MSIL2A_20231011T132231_N0509_R038_T22LHK_20231011T182853",
         "ba_detect":0,
         "pixels_of_ba":1,
-        "amount_of_focos":32
+        "amount_of_firespots":32,
+        "firespots_that":1
     },
     {
         "day_before":"2023-10-11",
@@ -600,7 +666,8 @@
         "item_after":"S2A_MSIL2A_20231014T133141_N0509_R081_T22LHK_20231014T191404",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":121
+        "amount_of_firespots":121,
+        "firespots_that":0
     },
     {
         "day_before":"2023-10-14",
@@ -609,7 +676,8 @@
         "item_after":"S2B_MSIL2A_20231016T132239_N0509_R038_T22LHK_20231016T154544",
         "ba_detect":0,
         "pixels_of_ba":27,
-        "amount_of_focos":140
+        "amount_of_firespots":140,
+        "firespots_that":6
     },
     {
         "day_before":"2023-10-16",
@@ -618,7 +686,8 @@
         "item_after":"S2B_MSIL2A_20231019T133149_N0509_R081_T22LHK_20231019T154831",
         "ba_detect":0,
         "pixels_of_ba":37,
-        "amount_of_focos":573
+        "amount_of_firespots":573,
+        "firespots_that":11
     },
     {
         "day_before":"2023-10-19",
@@ -627,7 +696,8 @@
         "item_after":"S2A_MSIL2A_20231021T132231_N0509_R038_T22LHK_20231021T184201",
         "ba_detect":1,
         "pixels_of_ba":656,
-        "amount_of_focos":240
+        "amount_of_firespots":240,
+        "firespots_that":30
     },
     {
         "day_before":"2023-10-21",
@@ -636,7 +706,8 @@
         "item_after":"S2B_MSIL2A_20231108T133149_N0509_R081_T22LHK_20231108T160721",
         "ba_detect":0,
         "pixels_of_ba":2,
-        "amount_of_focos":190
+        "amount_of_firespots":190,
+        "firespots_that":2
     },
     {
         "day_before":"2023-11-08",
@@ -645,7 +716,8 @@
         "item_after":"S2A_MSIL2A_20231110T132231_N0509_R038_T22LHK_20231110T182053",
         "ba_detect":0,
         "pixels_of_ba":7,
-        "amount_of_focos":122
+        "amount_of_firespots":122,
+        "firespots_that":6
     },
     {
         "day_before":"2023-11-10",
@@ -654,7 +726,8 @@
         "item_after":"S2A_MSIL2A_20231113T133141_N0509_R081_T22LHK_20231113T183604",
         "ba_detect":0,
         "pixels_of_ba":35,
-        "amount_of_focos":132
+        "amount_of_firespots":132,
+        "firespots_that":3
     },
     {
         "day_before":"2023-11-13",
@@ -663,7 +736,8 @@
         "item_after":"S2B_MSIL2A_20231115T132229_N0509_R038_T22LHK_20231115T154732",
         "ba_detect":0,
         "pixels_of_ba":2,
-        "amount_of_focos":72
+        "amount_of_firespots":72,
+        "firespots_that":2
     },
     {
         "day_before":"2023-11-15",
@@ -672,7 +746,8 @@
         "item_after":"S2B_MSIL2A_20231118T133149_N0509_R081_T22LHK_20231118T160259",
         "ba_detect":0,
         "pixels_of_ba":1,
-        "amount_of_focos":41
+        "amount_of_firespots":41,
+        "firespots_that":1
     },
     {
         "day_before":"2023-11-18",
@@ -681,7 +756,8 @@
         "item_after":"S2A_MSIL2A_20231123T133141_N0509_R081_T22LHK_20231123T182556",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":28
+        "amount_of_firespots":28,
+        "firespots_that":0
     },
     {
         "day_before":"2023-11-18",
@@ -690,7 +766,8 @@
         "item_after":"S2A_MSIL2A_20231123T133141_N0509_R081_T22LHK_20231123T162058",
         "ba_detect":0,
         "pixels_of_ba":49,
-        "amount_of_focos":28
+        "amount_of_firespots":28,
+        "firespots_that":6
     },
     {
         "day_before":"2023-11-23",
@@ -699,7 +776,8 @@
         "item_after":"S2B_MSIL2A_20231125T132229_N0509_R038_T22LHK_20231125T154827",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":12
+        "amount_of_firespots":12,
+        "firespots_that":0
     },
     {
         "day_before":"2023-11-25",
@@ -708,7 +786,8 @@
         "item_after":"S2B_MSIL2A_20231128T133139_N0509_R081_T22LHK_20231128T160333",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":15
+        "amount_of_firespots":15,
+        "firespots_that":0
     },
     {
         "day_before":"2023-11-28",
@@ -717,7 +796,8 @@
         "item_after":"S2A_MSIL2A_20231210T132231_N0509_R038_T22LHK_20231210T170150",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":82
+        "amount_of_firespots":82,
+        "firespots_that":0
     },
     {
         "day_before":"2023-12-10",
@@ -726,7 +806,8 @@
         "item_after":"S2A_MSIL2A_20231213T133141_N0510_R081_T22LHK_20231213T172051",
         "ba_detect":0,
         "pixels_of_ba":39,
-        "amount_of_focos":6
+        "amount_of_firespots":6,
+        "firespots_that":2
     },
     {
         "day_before":"2023-12-13",
@@ -735,7 +816,8 @@
         "item_after":"S2B_MSIL2A_20231215T132229_N0510_R038_T22LHK_20231215T142236",
         "ba_detect":0,
         "pixels_of_ba":7,
-        "amount_of_focos":8
+        "amount_of_firespots":8,
+        "firespots_that":1
     },
     {
         "day_before":"2023-12-15",
@@ -744,7 +826,8 @@
         "item_after":"S2B_MSIL2A_20231218T133149_N0510_R081_T22LHK_20231218T155240",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":31
+        "amount_of_firespots":31,
+        "firespots_that":0
     },
     {
         "day_before":"2023-12-18",
@@ -753,7 +836,8 @@
         "item_after":"S2B_MSIL2A_20231225T132239_N0510_R038_T22LHK_20231225T142751",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":2
+        "amount_of_firespots":2,
+        "firespots_that":0
     },
     {
         "day_before":"2023-12-25",
@@ -762,6 +846,7 @@
         "item_after":"S2B_MSIL2A_20231228T133149_N0510_R081_T22LHK_20231228T155240",
         "ba_detect":0,
         "pixels_of_ba":0,
-        "amount_of_focos":3
+        "amount_of_firespots":3,
+        "firespots_that":0
     }
 ]
