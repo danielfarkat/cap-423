@@ -19,7 +19,7 @@ import shapely
 import lxml
 from tqdm import tqdm
 import os
-
+from rasterio.mask import mask
 def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
     '''
     input:
@@ -179,6 +179,7 @@ def print_points(lat_min, lon_min, lat_max, lon_max, year, first_month, first_da
     gdf = gpd.GeoDataFrame(df, geometry='geometry')
     gdf.crs = {"init": "epsg:4326"}
     gdf_size= len(gdf)
+    # print(gdf_size)
     
     return gdf, gdf_size
 
@@ -262,8 +263,6 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
 
     - Cloud Porcantage;
 
-    - Output dir;
-
     JSON Name:
 
     aerly_burned_areta_at_tile_"TILE NAME"_year_"ANALYSYS YEAR".json
@@ -296,9 +295,9 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
     day_after_files = []
     item_before_files = []
     item_after_files = []
-    focos_in_the_area=[]
-    pixels_sum_value=[]
-
+    focos_in_the_area = []
+    touch_foco=[]
+    pixels_sum_value = []
     # for i in tqdm(range(1), desc="Processando assets", unit="asset"):
     for i in tqdm(range(len(df)-1), desc="Processando assets", unit="asset"):    
         # asset_exemple = 76
@@ -331,7 +330,6 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
         year = str(dates_after.year) 
         second_month = f"{dates_after.month:02d}" 
         second_day = f"{dates_after.day:02d}" 
-        caminho_arquivo = bbox_4326
 
         # Gera buffers e máscaras rasterizadas para focos de incêndio
         focos, focos_size = cluster_fire_spots(bbox_4326, year, first_month, first_day, second_month, second_day)
@@ -341,15 +339,29 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
 
         gdf_focos_buffer = gpd.GeoDataFrame(geometry=focos_buffer, crs=focos.crs)
         focos_buffer_mask = gdf_focos_buffer.dissolve()
-        shapes = ((geom, 1,) for geom in focos_buffer_mask.geometry)
-        focos_buffer_mask_rasterized = rasterize(shapes, out_shape=dnbr_swir_mask.shape, transform=transform)
+        focos_shapes = ((geom, 1,) for geom in focos_buffer_mask.geometry)
+        focos_buffer_mask_rasterized = rasterize(focos_shapes, out_shape=dnbr_swir_mask.shape, transform=transform)
 
         # Calcula imagem modificada
         image_modified = dnbr_mask * dnbr_swir_mask * focos_buffer_mask_rasterized
-
         # Aplica a condição para gerar a máscara final
         image_conditioned = np.where(image_modified == 1, 1, np.nan)
+        focos_buffer_4326 = gdf_focos_buffer
+        focos_buffer_4326.columns
 
+   
+        count_intersect = 0
+        for _, poligono in focos_buffer_4326.iterrows():
+            # Criar máscara com a geometria do polígono
+            poligono = rasterize(poligono, out_shape=dnbr_swir_mask.shape, transform=transform)
+
+            # Criar uma máscara do raster usando a geometria
+            # out_image, out_transform = mask(image_modified_4326, geom, crop=True)
+            geometria = np.nansum(poligono * dnbr_mask * dnbr_swir_mask)
+            # Verificar se há valores diferentes de NoData (indicando interseção)
+            if np.any(geometria):
+                count_intersect += 1
+        Focos_touchs =count_intersect
         # Soma os valores diferentes de NaN
         sum_values = np.nansum(image_conditioned)
         pixels_sum = int(sum_values)
@@ -375,6 +387,7 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
         item_before_files.append(item_before)
         item_after_files.append(item_after)
         ba_files.append(ba_detect)
+        touch_foco.append(Focos_touchs)
         focos_in_the_area.append(focos_size)
         pixels_sum_value.append(pixels_sum)
     day_before_files= np.array(day_before_files)
@@ -384,6 +397,7 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
     ba_files = np.array(ba_files)
     focos_size = focos_in_the_area
     focos_size = np.array(focos_size)
+    touch_foco = np.array(touch_foco)
     pixels_sum = pixels_sum_value
     pixels_sum = np.array(pixels_sum)
         # Cria um DataFrame final com os resultados
@@ -394,14 +408,15 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
         "item_after": item_after_files,
         "ba_detect": ba_files,
         "pixels_of_ba":pixels_sum,
-        "amount_of_focos":focos_size
+        "amount_of_firespots":focos_size,
+        'firespots_that':touch_foco
     })
 
     # Cria o diretório se não existir
     os.makedirs(output_dir, exist_ok=True)
 
     # Salva o arquivo JSON no diretório criado
-    output_file = os.path.join(output_dir, f'early_burned_area_{year}_{tile}_{cloud_percentage}.json')
+    output_file = os.path.join(output_dir, f'early_burned_area_{year}_{tile}_{cloud_porcentage}.json')
     resultado_df.to_json(output_file, orient='records', lines=False, force_ascii=False, indent=4)
 
     # print(f"Arquivo salvo em: {output_file}")
