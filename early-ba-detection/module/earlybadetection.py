@@ -20,6 +20,8 @@ import lxml
 from tqdm import tqdm
 import os
 from rasterio.mask import mask
+from shapely.geometry import shape
+
 def generate_data_frame(year,tile='22LHH',cloud_porcentage=50):
     '''
     input:
@@ -251,6 +253,33 @@ def dnbr_and_dnbr_swir(dscl,ref_b8a_before,href_b11_before,href_b12_before,ref_b
 
     return dnbr_mask, dnbr_swir_mask,bbox_4326
 
+def raster_to_gpkg(year='2022', tile='22LHH', cloud_porcentage=50,output_dir='',i='i',image='imagem',transform='transform',crs ='crs'):
+
+    # Caminho do raster de entrada e saída
+
+    output_gpkg =  f"{output_dir}/{year}_{tile}_{cloud_porcentage}_{i}.gpkg"
+    # Abrir o raster
+    
+    # Gerar polígonos para os pixels
+    polygons = [
+        (shape(geom), "queimada" if value == 1 else "outros")
+        for geom, value in shapes(image, mask=None, transform=transform)
+    ]
+
+    # Criar GeoDataFrame
+    gdf = gpd.GeoDataFrame({"classe": [v for _, v in polygons]},
+                        geometry=[geom for geom, _ in polygons],
+                        crs=crs)
+
+    # Reprojetar para EPSG:4326
+    gdf = gdf.to_crs(epsg=4326)
+
+    # Salvar no formato GeoPackage
+    gdf.to_file(output_gpkg, layer="queimadas", driver="GPKG")
+
+    print(f"GeoPackage salvo em: {output_gpkg}")
+
+
 def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir=''):
     '''
     Main function:
@@ -344,8 +373,10 @@ def early_ba_detection(year='2022', tile='22LHH', cloud_porcentage=50,output_dir
 
         # Calcula imagem modificada
         image_modified = dnbr_mask * dnbr_swir_mask * focos_buffer_mask_rasterized
+
         # Aplica a condição para gerar a máscara final
         image_conditioned = np.where(image_modified == 1, 1, np.nan)
+        raster_to_gpkg(year,tile,cloud_porcentage,output_dir,i,image_conditioned,transform,crs_original)
         focos_buffer_4326 = gdf_focos_buffer
         focos_buffer_4326.columns
 
